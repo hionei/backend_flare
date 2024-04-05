@@ -144,8 +144,6 @@ class FlareController {
 
       await this.initContracts();
 
-      this.initVariables();
-
       await this.setupListener();
 
       console.log(
@@ -171,6 +169,8 @@ class FlareController {
         await this.getWhitelistedAddresses();
 
         await this.getEpochID();
+
+        this.initVariables();
 
         await this.getPrevEpochRewardRate();
 
