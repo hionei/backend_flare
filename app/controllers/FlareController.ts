@@ -16,6 +16,7 @@ dotenv.config();
 const networkName = "Flare";
 const Schema = mongoose.Schema;
 const mongoDB = "mongodb://localhost:27017/flareData";
+const conn = mongoose.createConnection(mongoDB);
 
 const addrSchema = new Schema({
   epochID: String,
@@ -274,7 +275,6 @@ class FlareController {
     const { address } = req.body;
 
     try {
-      const conn = mongoose.createConnection(mongoDB);
       const AutoClaimModel = conn.model("flareAutoclaimUsers", autoClaimSchema);
 
       await AutoClaimModel.findOneAndUpdate(
@@ -289,7 +289,6 @@ class FlareController {
 
   autoClaim = async () => {
     try {
-      const conn = mongoose.createConnection(mongoDB);
       const AutoClaimModel = conn.model("flareAutoclaimUsers", autoClaimSchema);
 
       const users = await AutoClaimModel.find({});
@@ -343,7 +342,6 @@ class FlareController {
     const { address } = req.body;
 
     try {
-      const conn = mongoose.createConnection(mongoDB);
       const usersModel = conn.model("users", usersSchema);
 
       await usersModel.findOneAndUpdate(
@@ -363,7 +361,6 @@ class FlareController {
     const { address } = req.body;
 
     try {
-      const conn = mongoose.createConnection(mongoDB);
       const AutoClaimModel = conn.model("flareAutoclaimUsers", autoClaimSchema);
 
       await AutoClaimModel.deleteOne({ address: address });
@@ -442,7 +439,6 @@ class FlareController {
 
   getPrevEpochRewardRate = async () => {
     try {
-      const conn = mongoose.createConnection(mongoDB);
       const prevModel = conn.model("prevData", prevSchema);
 
       const prevData = await prevModel.find({
@@ -474,7 +470,6 @@ class FlareController {
 
   savePrevData = async () => {
     try {
-      const conn = mongoose.createConnection(mongoDB);
       const prevModel = conn.model("prevData", prevSchema);
 
       await prevModel.findOneAndUpdate(
@@ -523,7 +518,6 @@ class FlareController {
     }
 
     for (let symbol of FLR_SYMBOLS) {
-      const conn = mongoose.createConnection(mongoDB);
       const dynamicAddrModel = conn.model(symbol, addrSchema);
       const dbRows = await dynamicAddrModel.find();
       let totalResult = {};
@@ -796,7 +790,6 @@ class FlareController {
                 `💲Flare Price finalized for ${contractWithSymbol.symbol} in epochId ${epochId} 💲`
               );
             }
-            const conn = mongoose.createConnection(mongoDB);
             const dynamicAddrModel = conn.model(
               contractWithSymbol.symbol,
               addrSchema
