@@ -282,8 +282,11 @@ class FlareController {
         {},
         { new: true, upsert: true }
       );
+      return res.json({ Result: "Enabled Auto claim" });
     } catch (err) {
+      2;
       console.log(err.message);
+      return res.json({ Result: err.message });
     }
   };
 
@@ -376,8 +379,11 @@ class FlareController {
       const AutoClaimModel = conn.model("flareAutoclaimUsers", autoClaimSchema);
 
       await AutoClaimModel.deleteOne({ address: address });
+
+      return res.json({ Result: "Removed Auto Claim" });
     } catch (err) {
       console.log(err.message);
+      return res.json({ Result: err.message });
     }
   };
 
