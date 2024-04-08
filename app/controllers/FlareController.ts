@@ -338,6 +338,18 @@ class FlareController {
     }
   };
 
+  ViewUsers = async (req: Request, res: Response) => {
+    try {
+      const usersModel = conn.model("users", usersSchema);
+
+      const users = await usersModel.find({});
+      return res.json(users);
+    } catch (err) {
+      console.log(err.message);
+      return res.json({ message: "failed to load users data" });
+    }
+  };
+
   AddNewUser = async (req: Request, res: Response) => {
     const { address } = req.body;
 
@@ -659,7 +671,7 @@ class FlareController {
             this.web3.utils.fromWei(this.currentEpochRewardList[addr], "ether")
           );
           const votePower = Number(
-            this.web3.utils.fromWei(this.votePowerList[addr], "ether")
+            this.web3.utils.fromWei(this.lockedVotePowerList[addr], "ether")
           );
 
           if (isNaN(totalReward) || isNaN(currentReward) || isNaN(votePower)) {
