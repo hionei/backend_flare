@@ -473,14 +473,19 @@ class FlareController {
         epochID: String(Number(this.currentRewardEpochID) - 1),
       });
       for (let addr in this.addrWhitelistInfo) {
+        console.log(prevData[0].prevTotalReward[addr]);
         const prevTotalReward = Number(
           this.web3.utils.fromWei(prevData[0].prevTotalReward[addr], "ether")
         ).toFixed();
         prevT = prevTotalReward;
+        console.log(prevData[0].prevEpochReward[addr]);
+
         const prevEpochReward = Number(
           this.web3.utils.fromWei(prevData[0].prevEpochReward[addr], "ether")
         ).toFixed();
         prevE = prevEpochReward;
+        console.log(prevData[0].votePower[addr]);
+
         const votePower = Number(
           this.web3.utils.fromWei(prevData[0].votePower[addr], "ether")
         ).toFixed();
