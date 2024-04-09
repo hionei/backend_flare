@@ -463,9 +463,6 @@ class FlareController {
   };
 
   getPrevEpochRewardRate = async () => {
-    let prevT = "";
-    let prevE = "";
-    let vp = "";
     try {
       const prevModel = conn.model("prevData", prevSchema);
 
@@ -474,23 +471,17 @@ class FlareController {
       });
       for (let addr in this.addrWhitelistInfo) {
         if (!prevData[0].prevTotalReward[addr]) continue;
-        console.log("prevTotalReward", prevData[0].prevTotalReward[addr]);
         const prevTotalReward = Number(
           this.web3.utils.fromWei(prevData[0].prevTotalReward[addr], "ether")
         ).toFixed();
-        prevT = prevTotalReward;
-        console.log("prevEpochReward", prevData[0].prevEpochReward[addr]);
 
         const prevEpochReward = Number(
           this.web3.utils.fromWei(prevData[0].prevEpochReward[addr], "ether")
         ).toFixed();
-        prevE = prevEpochReward;
-        console.log("VotePower", prevData[0].votePower[addr]);
 
         const votePower = Number(
           this.web3.utils.fromWei(prevData[0].votePower[addr], "ether")
         ).toFixed();
-        vp = votePower;
 
         this.prevRewardRateList[addr] = Number(
           ((Number(prevTotalReward) - Number(prevEpochReward)) /
@@ -498,7 +489,6 @@ class FlareController {
             100
         ).toFixed(4);
       }
-      prevT = prevE = vp = "";
     } catch (err) {
       console.log("getPrevData", err.message, prevT, prevE, vp);
     }
