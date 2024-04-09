@@ -490,7 +490,7 @@ class FlareController {
         ).toFixed(4);
       }
     } catch (err) {
-      console.log("getPrevData", err.message, prevT, prevE, vp);
+      console.log("getPrevData", err.message);
     }
   };
 
