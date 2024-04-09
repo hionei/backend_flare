@@ -463,6 +463,9 @@ class FlareController {
   };
 
   getPrevEpochRewardRate = async () => {
+    let prevT = "";
+    let prevE = "";
+    let vp = "";
     try {
       const prevModel = conn.model("prevData", prevSchema);
 
@@ -473,12 +476,15 @@ class FlareController {
         const prevTotalReward = Number(
           this.web3.utils.fromWei(prevData[0].prevTotalReward[addr], "ether")
         ).toFixed();
+        prevT = prevTotalReward;
         const prevEpochReward = Number(
           this.web3.utils.fromWei(prevData[0].prevEpochReward[addr], "ether")
         ).toFixed();
+        prevE = prevEpochReward;
         const votePower = Number(
           this.web3.utils.fromWei(prevData[0].votePower[addr], "ether")
         ).toFixed();
+        vp = votePower;
 
         this.prevRewardRateList[addr] = Number(
           ((Number(prevTotalReward) - Number(prevEpochReward)) /
@@ -486,8 +492,9 @@ class FlareController {
             100
         ).toFixed(4);
       }
+      prevT = prevE = vp = "";
     } catch (err) {
-      console.log("getPrevData", err.message);
+      console.log("getPrevData", err.message, prevT, prevE, vp);
     }
   };
 
