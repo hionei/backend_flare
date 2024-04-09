@@ -473,6 +473,7 @@ class FlareController {
         epochID: String(Number(this.currentRewardEpochID) - 1),
       });
       for (let addr in this.addrWhitelistInfo) {
+        if (!prevData[0].prevTotalReward[addr]) continue;
         console.log("prevTotalReward", prevData[0].prevTotalReward[addr]);
         const prevTotalReward = Number(
           this.web3.utils.fromWei(prevData[0].prevTotalReward[addr], "ether")
