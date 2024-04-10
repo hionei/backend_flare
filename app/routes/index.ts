@@ -9,5 +9,6 @@ router.post("/enable-auto-claim", Flare.enableAutoClaim);
 router.post("/remove-auto-claim", Flare.removeAutoClaim);
 router.post("/add-new-user", Flare.AddNewUser);
 router.get("/view-users", Flare.ViewUsers);
+router.get("/delegators/:address/:page", Songbird.GetDelegators);
 
 export default router;
