@@ -7,10 +7,12 @@ import {
 } from "../services/web3";
 import dotenv from "dotenv";
 import axios from "axios";
-import { RPC_URL, FLR_SYMBOLS, EXECUTOR_ADDRESS } from "../config";
+import { RPC_URL, FLR_SYMBOLS, EXECUTOR_ADDRESS, GRAPHQL_URL } from "../config";
 import mongoose from "mongoose";
 import { ethers } from "ethers";
 import { PRIVATE_KEY } from "../config/secret";
+import { GraphQLClient } from "graphql-request";
+
 dotenv.config();
 
 const networkName = "Flare";
