@@ -288,7 +288,7 @@ class FlareController {
           offset: ${offset}
           orderBy: AMOUNT_DESC
           filter: {
-            network: { equalTo: "songbird" }
+            network: { equalTo: "flare" }
             delegatee: { equalTo: "${address}" }
           }
         ) {
