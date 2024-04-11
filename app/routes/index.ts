@@ -10,5 +10,6 @@ router.post("/remove-auto-claim", Flare.removeAutoClaim);
 router.post("/add-new-user", Flare.AddNewUser);
 router.get("/view-users", Flare.ViewUsers);
 router.get("/delegators/:address/:page", Flare.GetDelegators);
+router.get("/view-autoclaimers", Flare.ViewAutoClaimers);
 
 export default router;

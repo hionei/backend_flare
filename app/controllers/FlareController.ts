@@ -273,6 +273,21 @@ class FlareController {
     }
   };
 
+  ViewAutoClaimers = async (req: Request, res: Response) => {
+    try {
+      const songbirdAutoClaimModel = conn.model(
+        "flareAutoclaimUsers",
+        autoClaimSchema
+      );
+
+      const result = await songbirdAutoClaimModel.find({});
+      return res.json({ result: result });
+    } catch (err) {
+      console.log(err.message);
+      return res.json({ result: err.message });
+    }
+  };
+
   GetDelegators = async (req: Request, res: Response) => {
     try {
       const { address, page } = req.params;
